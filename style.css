@@ -1,25 +1,48 @@
+
+/* Color Palette */
 :root {
     --black: #000;
     --white: #fff;
     --color-primary: hsl(102, 53%, 93%);
     --color-secondary:#18453B;
-    --color-tertiary: hsl(160, 80%, 20%);
-    --color-accent: hsl(40, 80%, 20%);
+    --color-tertiary: hsl(160, 60%, 40%);
+    --color-accent: hsl(40, 90%, 55%);
+}
 
-    --font-body: "Helvetica", sans-serif;
+/* Typography */
+:root {
+    --font-body: "Onest", sans-serif;
     --font-heading: "Verdana", serif;
+    --title-name-font: "Onest", sans-serif;
+    --title-name-weight: 700;
 
     --font-size-base: 14px;
     --font-size-heading: 2em;
+}
 
+/* General Layout */
+:root {
     --padding-base: 1rem;
     --padding-section: 1rem;
-    }
+    --header-height: calc(2 * var(--font-size-base) + 3 * var(--padding-base));
+    --footer-height: calc(2 * var(--font-size-base) + 1em);
+}
+
+/* Global Grid Variables */
+:root {
+
+    --cell-size: 10vw;
+    --number-of-columns: 8;
+}
 
 body {
     font-family: var(--font-body);
     font-size: var(--font-size-base);
+
     padding: var(--padding-base);
+    padding-top: calc(var(--header-height) + var(--padding-base));
+    padding-bottom: calc(var(--footer-height) + 3 * var(--padding-base));
+
 }
 
 h1, h2, h3 {
@@ -34,19 +57,26 @@ section {
 header {
     position: fixed;
     top: 0; left: 0; right: 0;
-    width: 100%; height: 2*var(--font-size-base);
-    background: var(--color-primary); color: var(--color-secondary);
+    width: 100%; height: var(--header-height);
+    background: var(--white); color: var(--color-secondary);
     font-size: var(--font-size-heading);
     padding-top: calc(2*var(--padding-base));
     padding-bottom: calc(2*var(--padding-base));
-    padding-left: 10rem;
-    padding-right: 10rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
   
     display: flex; align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
     z-index: 10;
     border-bottom: 2px solid var(--color-secondary);
+}
+
+header .title-name {
+    color: var(--color-secondary);
+    font-family: var(--title-name-font);
+    font-weight: var(--title-name-weight);
+    text-decoration: none;
 }
 
 header nav {
@@ -62,10 +92,56 @@ header > nav > a {
     margin-right: 1rem;
 }
 
+header > nav > a:hover {
+    /* font-weight: var(--title-name-weight); */
+    color: var(--color-accent);
+}
+
+/* Grid Styles */
+#grid {
+  display: grid;
+  grid-template-columns: repeat(var(--number-of-columns), var(--cell-size));
+  gap: calc(var(--padding-section) / 2);
+  justify-content: center;
+}
+
+.cell {
+  background-color: var(--color-secondary);
+  height: var(--cell-size); width: var(--cell-size);
+}
+
+.cell.on {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/*Container Styles*/
+.container {
+  display: flex;
+  gap: var(--padding-section); /* space between divs */
+  justify-content: center ;
+}
+
+.container > div {
+  flex: 1; /* each div takes equal space */
+}
+
+.image-block {
+  height: 300px;           /* fixed height for the image block */
+  background: #ccc;        /* placeholder color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-style: italic;
+  border: 2px dashed #999; /* optional dashed border */
+}
+
 footer {
     position: fixed;
     left: 0; bottom: 0;
     width: 100%;
+    height: var(--footer-height);
     background: var(--color-secondary);
     color: var(--color-primary);
     text-align: left;
@@ -80,12 +156,11 @@ footer .contact {
   align-items: center;
 }
 
-footer .contact .icon {
+footer .icon {
   margin-right: 6px;
   font-size: 1.4em;
   align-items: center;
 }
-
 
 /* Responsive header for small screens */
 @media (max-width: 600px) {

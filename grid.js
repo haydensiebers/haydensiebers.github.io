@@ -1,0 +1,32 @@
+
+const columns = 11;
+const rows = 5;
+
+let windowWidth = window.innerWidth;
+
+window.addEventListener('resize', () => {
+  width = window.innerWidth;
+  console.log('Updated width:', width);
+});
+
+document.documentElement.style.setProperty("--cell-size", Math.floor(windowWidth / (columns + 2)) + "px");
+document.documentElement.style.setProperty("--number-of-columns", columns);
+
+function createGrid(r, c) {
+    const grid = document.getElementById("grid");
+
+    for (let j = 0; j < rows; j++) {
+        for (let i = 0; i < columns; i++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+
+            cell.addEventListener("click", () => {
+                cell.classList.toggle("on");
+            });
+
+            grid.appendChild(cell);
+        }
+    }
+}
+
+createGrid(columns, rows);

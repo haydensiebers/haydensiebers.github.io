@@ -2,9 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    
     <title>Research</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    research
+    <header>
+        <a class="title-name", href="index.html">
+            Hayden Siebers
+        </a>
+        <nav>
+            <a href="research.html">Research</a>
+            <a href="teaching.html">Teaching</a>
+            <a href="about.html">About</a>
+            <a href="fun.html">Fun</a>
+        </nav>
+    </header>
+
+    Research
+
+    <footer>
+        Hayden Siebers <span id="year"></span>
+        <div class="contact">
+            <span class="icon">&#9993;</span>
+            <span>siebersh@msu.edu</span>
+        </div>
+    </footer>
+
 </body>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </html>
