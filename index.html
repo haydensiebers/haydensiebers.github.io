@@ -1,3 +1,4 @@
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,6 @@
 
 <header>
   <span>Hayden Siebers</span>
-  <div class="menu-icon" onclick="document.querySelector('header').classList.toggle('nav-open')">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
   <nav>
     <a href="research.html">Research</a>
     <a href="teaching.html">Teaching</a>
@@ -21,5 +17,14 @@
 </header>
 
 <footer>
-  ☺ Hayden Siebers 2025
+  Hayden Siebers <span id="year"></span>
+  <div class="contact">
+    <span class="icon">&#9993;</span>
+    <span>siebersh@msu.edu</span>
+  </div>
 </footer>
+
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
