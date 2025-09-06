@@ -1,12 +1,15 @@
 
 const columns = 11;
-const rows = 5;
+let rows = 5;
 
 let windowWidth = window.innerWidth;
 
 window.addEventListener('resize', () => {
-  width = window.innerWidth;
-  console.log('Updated width:', width);
+  windowWidth = window.innerWidth;
+  windowHeight = window.innerHeight;
+  console.log('Updated width:', windowWidth);
+  document.documentElement.style.setProperty("--cell-size", Math.floor(windowWidth / (columns + 2)) + "px");
+  rows = Math.floor((window.innerHeight - 200) / (windowWidth / (columns + 2)));
 });
 
 document.documentElement.style.setProperty("--cell-size", Math.floor(windowWidth / (columns + 2)) + "px");

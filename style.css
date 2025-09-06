@@ -3,10 +3,10 @@
 :root {
     --black: #000;
     --white: #fff;
-    --color-primary: hsl(102, 53%, 93%);
+    --color-primary: #e9f7e4;
     --color-secondary:#18453B;
-    --color-tertiary: hsl(160, 60%, 40%);
-    --color-accent: hsl(40, 90%, 55%);
+    --color-tertiary: #29a37a;
+    --color-accent: #f4af25;
 }
 
 /* Typography */
@@ -16,33 +16,38 @@
     --title-name-font: "Onest", sans-serif;
     --title-name-weight: 700;
 
+    font-size: var(--font-size-base);
     --font-size-base: 14px;
     --font-size-heading: 2em;
 }
 
 /* General Layout */
 :root {
-    --padding-base: 1rem;
-    --padding-section: 1rem;
+    --padding-base: 16px;
+    --padding-section: 12px;
     --header-height: calc(2 * var(--font-size-base) + 3 * var(--padding-base));
     --footer-height: calc(2 * var(--font-size-base) + 1em);
 }
 
 /* Global Grid Variables */
 :root {
-
     --cell-size: 10vw;
     --number-of-columns: 8;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 
 body {
     font-family: var(--font-body);
     font-size: var(--font-size-base);
 
-    padding: var(--padding-base);
-    padding-top: calc(var(--header-height) + var(--padding-base));
-    padding-bottom: calc(var(--footer-height) + 3 * var(--padding-base));
+    display: flex; flex-direction: column;
+    margin: 0; padding: 0;
 
+    min-height: 100vh;
 }
 
 h1, h2, h3 {
@@ -55,19 +60,13 @@ section {
 }
 
 header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    width: 100%; height: var(--header-height);
+    /*height: var(--header-height); */
     background: var(--white); color: var(--color-secondary);
     font-size: var(--font-size-heading);
-    padding-top: calc(2*var(--padding-base));
-    padding-bottom: calc(2*var(--padding-base));
-    padding-left: 5rem;
-    padding-right: 5rem;
-  
+    padding: var(--padding-base);
+    /* padding-left: calc(4*var(--padding-base)); padding-right: calc(4*var(--padding-base)); */
     display: flex; align-items: center;
     justify-content: space-between;
-    box-sizing: border-box;
     z-index: 10;
     border-bottom: 2px solid var(--color-secondary);
 }
@@ -89,12 +88,29 @@ header > nav > a {
     font-family: var(--font-body);
     color: var(--color-secondary);
     text-decoration: none;
-    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
 header > nav > a:hover {
     /* font-weight: var(--title-name-weight); */
     color: var(--color-accent);
+}
+
+main {
+    padding: var(--padding-base);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Canvas Styles */
+
+#canvas-container {
+    height: 100vh;
+    position: relative;
+    background: #7e2323; /* optional: to visualize the area */
+}
+
+canvas {
 }
 
 /* Grid Styles */
@@ -117,9 +133,22 @@ header > nav > a:hover {
 
 /*Container Styles*/
 .container {
-  display: flex;
-  gap: var(--padding-section); /* space between divs */
-  justify-content: center ;
+    position: absolute;
+    padding: var(--padding-base);
+    top: 0; left: 0;
+    display: flex;
+    gap: var(--padding-section); /* space between divs */
+    justify-content: center ;
+    background: transparent;
+    z-index: 5;
+}
+
+.container.row {
+  flex-direction: row;
+}
+
+.container.column {
+  flex-direction: column;
 }
 
 .container > div {
@@ -127,7 +156,7 @@ header > nav > a:hover {
 }
 
 .image-block {
-  height: 300px;           /* fixed height for the image block */
+  height: 300px;    
   background: #ccc;        /* placeholder color */
   display: flex;
   align-items: center;
@@ -137,11 +166,8 @@ header > nav > a:hover {
   border: 2px dashed #999; /* optional dashed border */
 }
 
+
 footer {
-    position: fixed;
-    left: 0; bottom: 0;
-    width: 100%;
-    height: var(--footer-height);
     background: var(--color-secondary);
     color: var(--color-primary);
     text-align: left;
