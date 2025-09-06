@@ -148,22 +148,33 @@ function drawNode(name, vertex, classificationFilter = null) {
         return;
     }
     if (vertex.classification === "main") {
-        fill(whiteColor);
-        stroke(secondaryColor);
-        strokeWeight(5);
-        ellipse(vertexX, vertexY, diameter, diameter);
-
-        textAlign(CENTER, CENTER);
-        text(str(name), vertexX - (str(name).length)*fontSizeBase, vertexY);
+      drawMainNode(name, vertex);
     } 
     if (vertex.classification === "sub") {
-        fill(primaryColor);
-        stroke(secondaryColor);
-        strokeWeight(2);
-        ellipse(vertexX, vertexY, diameter/2, diameter/2);
+      drawSubNode(name, vertex);
     }
 
 }
+
+function drawMainNode(name, vertex) {
+    fill(whiteColor);
+  stroke(secondaryColor);
+  strokeWeight(5);
+  ellipse(vertexX, vertexY, diameter, diameter);
+  /*
+  textAlign(CENTER, CENTER);
+  text(str(name), vertexX - (str(name).length)*fontSizeBase, vertexY);
+  */
+}
+
+function drawSubNode(name, vertex) {
+    fill(primaryColor);
+    stroke(secondaryColor);
+    strokeWeight(2);
+    ellipse(vertexX, vertexY, diameter/2, diameter/2);
+}
+
+
 
 function drawEdges(name, vertex, graph) {
     vertexX = vertex.position.x * width;
