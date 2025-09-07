@@ -50,9 +50,21 @@ body {
     min-height: 100vh;
 }
 
+.accent {
+  color: var(--color-accent); /* or your chosen accent color */
+  font-weight: bold;          /* optional, makes it stand out */
+}
+
 h1, h2, h3 {
-    font-family: var(--font-heading);
-    margin-bottom: var(--padding-base);
+    font-family: var(--font-body);
+    color: var(--color-secondary);
+    justify-content: center;
+    padding: 0; margin: 0;
+}
+
+p {
+  padding: 0; margin: 0;  
+  padding-bottom: var(--padding-base);
 }
 
 section {
@@ -107,7 +119,7 @@ main {
 #canvas-container {
     height: 100vh;
     position: relative;
-    background: #7e2323; /* optional: to visualize the area */
+    background: var(--white); /* optional: to visualize the area */
 }
 
 canvas {
