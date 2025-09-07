@@ -83,6 +83,7 @@ console.log(canvas)
 
 function draw() {
   background(255);
+  noLoop();
 
   for (let [name, vertex] of Object.entries(graphDrawing.vertices)) {
       drawEdges(name, vertex, graphDrawing);
@@ -157,10 +158,14 @@ function drawNode(name, vertex, classificationFilter = null) {
 }
 
 function drawMainNode(name, vertex) {
-    fill(whiteColor);
+  fill(whiteColor);
   stroke(secondaryColor);
-  strokeWeight(5);
-  ellipse(vertexX, vertexY, diameter, diameter);
+  strokeWeight(2);
+
+  vertexX = vertex.position.x * width;
+  vertexY = vertex.position.y * height;
+  
+  handdrawnCicle(vertexX, vertexY, diameter, 9, 3);
   /*
   textAlign(CENTER, CENTER);
   text(str(name), vertexX - (str(name).length)*fontSizeBase, vertexY);
@@ -171,10 +176,11 @@ function drawSubNode(name, vertex) {
     fill(primaryColor);
     stroke(secondaryColor);
     strokeWeight(2);
-    ellipse(vertexX, vertexY, diameter/2, diameter/2);
+
+    vertexX = vertex.position.x * width;
+    vertexY = vertex.position.y * height;
+    handdrawnCicle(vertexX, vertexY, diameter/2, 6, 1);
 }
-
-
 
 function drawEdges(name, vertex, graph) {
     vertexX = vertex.position.x * width;
@@ -193,4 +199,27 @@ function drawEdges(name, vertex, graph) {
         strokeWeight(edge.weight);
         line(vertexX, vertexY, targetX, targetY);
     }
+}
+
+function handdrawnCicle(x, y, diameter, numPoints = 4, jitter = 1) {
+  let radius = diameter / 2; 
+  let numLines = 5; // number of overlapping lines for hand-drawn effect
+
+  
+  for (let l = 0; l < numLines; l++) {
+    beginShape();
+    for (let i = 0; i < numPoints; i++) {
+      let angle = map(i, 0, numPoints, 0, TWO_PI);
+      let r = radius; // jittered radius
+      let positionX = x + r * cos(angle) + random(-jitter, jitter);
+      let positionY = y + r * sin(angle) + random(-jitter, jitter);
+      
+      // curveVertex makes it smoother
+      curveVertex(positionX, positionY);
+    }
+    endShape(CLOSE);
+    noFill();
+  }
+
+  endShape(CLOSE);
 }
