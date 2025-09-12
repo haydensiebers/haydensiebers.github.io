@@ -6,9 +6,14 @@
       
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <title>Fun</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+
+    <script src="knotWFC.js" defer></script>
+
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -26,21 +31,28 @@
         </nav>
     </header>
     
-    <main>    
-        <div id="Container"> 
-            <h3>Fun World Record: <span class="accent">2:29</span> </h3>
-            <p>held by <span class="accent">Vance Siebers</span></p>
-        </div>
-        <div id="grid"></div>
-        <script src="grid.js"></script>
+    <main>
+        <div>
+            <div id="canvas-container"></div>
+
+            <script src="knotWFC.js"></script>
+        </div>    
     </main>
 
-
     <footer>
-        <span class="icon">&#9633;</span> Hayden Siebers <span id="year"></span>
-        <div class="contact">
-            <span class="icon">&#9993;</span>
-            <span>siebersh@msu.edu</span>
+        <div>
+            <div>
+                Hayden Siebers <span id="year"></span>
+            </div>
+            
+            <div>
+                <span class="icon">&#9993;</span>
+                <span>siebersh@msu.edu</span>
+            </div>
+        </div>
+
+        <div>
+            <span class="icon">&#9774;</span>
         </div>
     </footer>
 

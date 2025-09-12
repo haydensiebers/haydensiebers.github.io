@@ -3,17 +3,44 @@
 :root {
     --black: #000;
     --white: #fff;
-    --color-primary: #e9f7e4;
-    --color-secondary:#18453B;
-    --color-tertiary: #29a37a;
-    --color-accent: #f4af25;
+    --color-primary: #fbf7f3;
+    --color-secondary:#18453b57;
+    --color-msu-green: #18453B;
+    --color-tertiary: #6777dc;
+    --color-accent: #f4b642;
 }
+
+.greendiv {
+  background: var(--color-msu-green);
+  color: var(--color-primary);
+}
+
+.accentdiv {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.primarydiv {
+  background: var(--color-primary);
+  color: var(--black);
+}
+
+.secondarydiv{
+  background: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+.tertiarydiv{
+  background: var(--color-tertiary);
+  color: var(--color-msu-green);
+}
+
 
 /* Typography */
 :root {
-    --font-body: "Onest", sans-serif;
-    --font-heading: "Verdana", serif;
-    --title-name-font: "Onest", sans-serif;
+    --font-body: "Overpass";
+    --font-heading: "Overpass";
+    --title-name-font: "Overpass";
     --title-name-weight: 700;
 
     font-size: var(--font-size-base);
@@ -23,188 +50,119 @@
 
 /* General Layout */
 :root {
-    --padding-base: 16px;
-    --padding-section: 12px;
-    --header-height: calc(2 * var(--font-size-base) + 3 * var(--padding-base));
-    --footer-height: calc(2 * var(--font-size-base) + 1em);
+  --padding-base: 16px;
+  --padding-section: 12px;
+  --header-height: calc(2 * var(--font-size-base) + 3 * var(--padding-base));
+  --footer-height: calc(2 * var(--font-size-base) + 1em);
 }
 
-/* Global Grid Variables */
-:root {
-    --cell-size: 10vw;
-    --number-of-columns: 8;
-}
+/*Global Styles*/
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-
 body {
-    font-family: var(--font-body);
-    font-size: var(--font-size-base);
+  font-family: var(--font-body);
+  background-color: var(--color-primary);
+  color: var(--black);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
 
-    display: flex; flex-direction: column;
-    margin: 0; padding: 0;
-
-    min-height: 100vh;
-}
-
-.accent {
-  color: var(--color-accent); /* or your chosen accent color */
-  font-weight: bold;          /* optional, makes it stand out */
-}
-
-h1, h2, h3 {
-    font-family: var(--font-body);
-    color: var(--color-secondary);
-    justify-content: center;
-    padding: 0; margin: 0;
-}
-
-p {
-  padding: 0; margin: 0;  
-  padding-bottom: var(--padding-base);
-}
-
-section {
-    padding: var(--padding-section);
-}
-
-header {
-    /*height: var(--header-height); */
-    background: var(--white); color: var(--color-secondary);
-    font-size: var(--font-size-heading);
-    padding: var(--padding-base);
-    /* padding-left: calc(4*var(--padding-base)); padding-right: calc(4*var(--padding-base)); */
-    display: flex; align-items: center;
-    justify-content: space-between;
-    z-index: 10;
-    border-bottom: 2px solid var(--color-secondary);
-}
-
-header .title-name {
-    color: var(--color-secondary);
-    font-family: var(--title-name-font);
-    font-weight: var(--title-name-weight);
-    text-decoration: none;
-}
-
-header nav {
-    display: flex;
-    align-items: center;
-}
-
-header > nav > a {
-    font-size: var(--font-size-base);
-    font-family: var(--font-body);
-    color: var(--color-secondary);
-    text-decoration: none;
-    margin-left: 1rem;
-}
-
-header > nav > a:hover {
-    /* font-weight: var(--title-name-weight); */
-    color: var(--color-accent);
+  min-height: 100vh;
 }
 
 main {
-    padding: var(--padding-base);
-    min-height: 100vh;
-    position: relative;
+  margin: var(--padding-base);
+  padding: var(--padding-base);
+  flex: 1;
 }
 
-/* Canvas Styles */
-
-#canvas-container {
-    height: 100vh;
-    position: relative;
-    background: var(--white); /* optional: to visualize the area */
+.full-width {
+  margin: 0 calc(-2 * var(--padding-base)); /* cancel out main's padding */
+  width: calc(100% + 4 * var(--padding-base));
 }
 
-canvas {
-}
-
-/* Grid Styles */
-#grid {
-  display: grid;
-  grid-template-columns: repeat(var(--number-of-columns), var(--cell-size));
-  gap: calc(var(--padding-section) / 2);
+.center {
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.cell {
-  background-color: var(--color-secondary);
-  height: var(--cell-size); width: var(--cell-size);
+.padded{
+  padding: var(--padding-base);
 }
 
-.cell.on {
-  background-color: var(--color-accent);
-  color: white;
+.halfPadded{
+  padding: calc(0.5 * var(--padding-base));
 }
 
-/*Container Styles*/
-.container {
-    position: absolute;
-    padding: var(--padding-base);
-    top: 0; left: 0;
-    display: flex;
-    gap: var(--padding-section); /* space between divs */
-    justify-content: center ;
-    background: transparent;
-    z-index: 5;
+.twentyPercentPadded{
+  padding: calc(0.2 * var(--padding-base));
 }
 
-.container.row {
-  flex-direction: row;
+div {
 }
 
-.container.column {
-  flex-direction: column;
+a {
+  text-decoration: none;
+  color: var(--black);
+  transition: color 0.2s ease;
+  font-weight: 600;
 }
 
-.container > div {
-  flex: 1; /* each div takes equal space */
+a:hover {
+  color: var(--color-accent)
 }
 
-.image-block {
-  height: 300px;    
-  background: #ccc;        /* placeholder color */
+.accent {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.icon {
+  font-size: 1.4em;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Header Styles */
+
+header {
+  background-color: var(--color-primary);
+  padding: var(--padding-base);
+  min-height: var(--header-height);
+  justify-content: space-between;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #666;
-  font-style: italic;
-  border: 2px dashed #999; /* optional dashed border */
 }
 
+.title-name {
+  font-family: var(--title-name-font);
+  font-weight: var(--title-name-weight);
+  font-size: 1.5em;
+  align-self: center;
+}
+
+/* Footer Styles */
 
 footer {
-    background: var(--color-secondary);
-    color: var(--color-primary);
-    text-align: left;
-    font-size: 0.8em;
-    font-family: var(--font-body);
-    padding: var(--padding-base);
-}
+  position: bottom;
+  background-color: var(--color-msu-green);
+  color: var(--color-primary);
+  min-height: var(--footer-height);
+  font-size: 0.9em;
+  padding: var(--padding-base);
 
-footer .contact {
-  margin-top: 2px;
   display: flex;
-  align-items: center;
-}
-
-footer .icon {
-  margin-right: 6px;
-  font-size: 1.4em;
-  align-items: center;
+  justify-content: space-between;
 }
 
 /* Responsive header for small screens */
 @media (max-width: 600px) {
   header {
-    min-height: 60px;
-    font-size: 1.2em;
-    padding: 0 1rem;
   }
 }

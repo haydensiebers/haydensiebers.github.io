@@ -159,7 +159,7 @@ function drawNode(name, vertex, classificationFilter = null) {
 
 function drawMainNode(name, vertex) {
   fill(whiteColor);
-  stroke(secondaryColor);
+  stroke(accentColor);
   strokeWeight(2);
 
   vertexX = vertex.position.x * width;
@@ -211,8 +211,8 @@ function handdrawnCicle(x, y, diameter, numPoints = 4, jitter = 1) {
     for (let i = 0; i < numPoints; i++) {
       let angle = map(i, 0, numPoints, 0, TWO_PI);
       let r = radius; // jittered radius
-      let positionX = x + r * cos(angle) + random(-jitter, jitter);
-      let positionY = y + r * sin(angle) + random(-jitter, jitter);
+      let positionX = x + r * cos(angle + random(-jitter, jitter)/50) + random(-jitter, jitter);
+      let positionY = y + r * sin(angle + random(-jitter, jitter)/50) + random(-jitter, jitter);
       
       // curveVertex makes it smoother
       curveVertex(positionX, positionY);
