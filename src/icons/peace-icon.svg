@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="210mm"
+   viewBox="0 0 210 210"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1">
+    <g
+       id="g16"
+       style="stroke:#ffffff">
+      <circle
+         style="fill:none;stroke:#ffffff;stroke-width:15.9336;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers"
+         id="path13-8"
+         cx="104.99999"
+         cy="105.00003"
+         r="81.734047" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:15.9336;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers"
+         d="M 105,23.265967 V 186.73408"
+         id="path14-2" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:15.9336;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers"
+         d="M 105,105 47.205292,162.79471"
+         id="path15-4" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:15.9336;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers"
+         d="m 105,105.00003 57.79469,57.7947"
+         id="path16-5" />
+    </g>
+  </g>
+</svg>

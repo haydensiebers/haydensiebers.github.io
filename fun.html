@@ -25,18 +25,40 @@
         </a>
         <nav>
     <!-- <a href="research.html">Research</a> -->
-            <a href="teaching.html">Teaching</a>
-            <a href="about.html">About</a>
-            <a href="fun.html">Fun</a>
+            <a href="teaching.html" class = "halfPadded">Teaching</a>
+            <a href="about.html" class = "halfPadded">About</a>
+            <a href="fun.html" class = "halfPadded">Fun</a>
         </nav>
     </header>
     
     <main>
-        <div>
-            <div id="canvas-container"></div>
+    
+        <div class="full-width doublePadded secondarydiv">
+            <div class="horizontal justifySpaceBetween">
 
-            <script src="knotWFC.js"></script>
-        </div>    
+                <div>
+                    <div>
+                        <h2>Random Knot Generator</h2>
+                        <h3>using <span class="colorTertiary"> wave function collapse</span></h3>
+                        <p>Create a random knot or link using the wave function collapse algorithm.</p>
+                    </div>
+                    <div class="controls justifySpaceBetween">
+                        <!-- <div class="horizontal">
+                            <p class="noBreak center halfPadded">Grid Size:</p>
+                            <input type="number" id="grid-size" min="2" max="20" value="5">
+                        </div> -->
+                        <button id="wfc-reset-button" class="halfPadded">Reset</button>
+                    </div>
+
+                </div>
+
+                <div>
+                    <div id="canvas-container"></div>
+                    <script src="knotWFC.js"></script>
+                </div>  
+            </div>
+        </div>
+
     </main>
 
     <footer>
@@ -46,14 +68,15 @@
             </div>
             
             <div>
-                <span class="icon">&#9993;</span>
+                <img src="src/icons/mail-icon.svg" alt="Email" class="icon">
                 <span>siebersh@msu.edu</span>
             </div>
         </div>
 
         <div>
-            <span class="icon">&#9774;</span>
+            <img src="src/icons/peace-icon.svg" alt="Email" class="icon">
         </div>
+        
     </footer>
 
 </body>

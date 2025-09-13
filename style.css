@@ -4,7 +4,7 @@
     --black: #000;
     --white: #fff;
     --color-primary: #fbf7f3;
-    --color-secondary:#18453b57;
+    --color-secondary:#18453b2a;
     --color-msu-green: #18453B;
     --color-tertiary: #6777dc;
     --color-accent: #f4b642;
@@ -27,7 +27,7 @@
 
 .secondarydiv{
   background: var(--color-secondary);
-  color: var(--color-primary);
+  color: var(--black);
 }
 
 .tertiarydiv{
@@ -96,6 +96,11 @@ main {
   padding: var(--padding-base);
 }
 
+.doublePadded{
+  padding: calc(2 * var(--padding-base));
+}
+
+
 .halfPadded{
   padding: calc(0.5 * var(--padding-base));
 }
@@ -104,7 +109,26 @@ main {
   padding: calc(0.2 * var(--padding-base));
 }
 
+.justifySpaceBetween{
+  display: flex;
+  justify-content: space-between;
+}
+
+.noBreak {
+  white-space: nowrap;
+}
+
 div {
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -123,11 +147,43 @@ a:hover {
   font-weight: 700;
 }
 
+.colorSecondary {
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+.colorMSUGreen {
+  color: var(--color-msu-green);
+  font-weight: 700;
+}
+
+.colorTertiary {
+  color: var(--color-tertiary);
+  font-weight: 700;
+}
+
 .icon {
   font-size: 1.4em;
   margin-right: 6px;
   vertical-align: middle;
+  width: 1.2em;
+  height: 1.2em;
 }
+
+button {
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 10%;
+  color: var(--white);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: color-mix(in srgb, var(--color-accent) 80%, black);
+}
+
 
 /* Header Styles */
 

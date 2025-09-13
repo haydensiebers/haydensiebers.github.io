@@ -58,15 +58,14 @@ class Tile {
   // draw a single tile
   draw(x, y, size, win) {
     win.push();
-    win.stroke(1);
-    win.noFill();
-    win.rect(x, y, size, size);
+    win.stroke(whiteColor);
+    win.fill(primaryColor);
     win.pop();
   }
 
   styleSettings(win) {
-    win.stroke(0);
-    win.strokeWeight(2);
+    win.stroke(tertiaryColor);
+    win.strokeWeight(8);
     win.noFill();       // optional
     win.textAlign(CENTER, CENTER);
   }
@@ -99,8 +98,7 @@ class TopRightTurnTile extends Tile {
     win.push();
     win.translate(x, y);
     super.styleSettings(win);
-    win.line(size/2, 0, size/2, size/2);
-    win.line(size, size/2, size/2, size/2);
+    win.arc(size, 0, size, size, HALF_PI, PI);
     win.pop();
   }
 }
@@ -117,8 +115,7 @@ class TopLeftTurnTile extends Tile {
     win.push();
     win.translate(x, y);
     super.styleSettings(win);
-    win.line(size/2, 0, size/2, size/2);
-    win.line(0, size/2, size/2, size/2);
+    win.arc(0, 0, size, size, 0, HALF_PI);
     win.pop();
 
   }
@@ -136,8 +133,7 @@ class BottomRightTurnTile extends Tile {
     win.push();
     win.translate(x, y);
     super.styleSettings(win);
-    win.line(size/2, size, size/2, size/2);
-    win.line(size, size/2, size/2, size/2);
+    win.arc(size, size, size, size, PI, 3*HALF_PI);
     win.pop();
   }
 }
@@ -154,8 +150,7 @@ class BottomLeftTurnTile extends Tile {
     win.push();
     win.translate(x, y);
     super.styleSettings(win);
-    win.line(size/2, size, size/2, size/2);
-    win.line(0, size/2, size/2, size/2);
+    win.arc(0, size, size, size, 3*HALF_PI, 2*PI);
     win.pop();
   }
 }
@@ -208,9 +203,15 @@ class VerticleCrossingTile extends Tile {
     win.push();
     win.translate(x, y);
     super.styleSettings(win);
+    //HorizontalUnder
+      win.line(size/4, size/2, 0, size/2);
+      win.line(size, size/2, 3*size/4, size/2);
+    //VerticalOver
     win.line(size/2, size, size/2, 0);
-      win.line(size/3, size/2, 0, size/2);
-      win.line(size, size/2, 2*size/3, size/2);
+    //Shadow
+    win.stroke(0, 0, 0, 100);
+      win.line(size/4, size/2, size/5, size/2);
+      win.line(4*size/5, size/2, 3*size/4, size/2);
     win.pop();
   }
 }
@@ -229,17 +230,37 @@ class HorizontalCrossingTile extends Tile {
     win.push();
     win.translate(x, y);
     super.styleSettings(win);
+
+    //VerticalUnder
+        win.line(size/2, size/4, size/2, 0);
+        win.line(size/2, size, size/2, 3*size/4);
+    //HorizontalOver
     win.line(size, size/2, 0, size/2);
-        win.line(size/2, size/3, size/2, 0);
-        win.line(size/2, size, size/2, 2*size/3);
+    //Shadow
+    win.stroke(0, 0, 0, 100);
+        win.line(size/2, size/4, size/2, size/5);
+        win.line(size/2, 4*size/5, size/2, 3*size/4);
+
     win.pop();
   }
 }
 
 let canvas;
 let grid = [];
+let running = false;  // whether WFC should run
+
 
 const EMPTY_TILE = new EmptyTile();
+
+const styles = getComputedStyle(document.documentElement);
+const primaryColor = styles.getPropertyValue('--color-primary').trim();
+const secondaryColor = styles.getPropertyValue('--color-secondary').trim();
+const tertiaryColor = styles.getPropertyValue('--color-tertiary').trim();
+const accentColor = styles.getPropertyValue('--color-accent').trim();
+const whiteColor = styles.getPropertyValue('--white').trim();
+const blackColor = styles.getPropertyValue('--black').trim();
+
+
 
 let tileOptions = [
     new BlankTile(),
@@ -259,7 +280,7 @@ function windowResized() {
 }
 
 function setup() {
-  canvas = createCanvas(300, 300);
+  canvas = createCanvas(250, 250);
   canvas.parent("canvas-container");
   resizeCanvas(canvas.parent().clientWidth, canvas.parent().clientHeight);
 
@@ -271,10 +292,17 @@ function setup() {
   let bl = new BottomLeftTurnTile();
 
   // make a 3x3 grid of cells with chosen tiles
-  let rows = 6;
-  let columns = 8;
-  let resolution = (canvas.parent().clientHeight / rows);
+  let rows = 7;
+  let columns = 7;
+  let resolution = ((canvas.parent().clientHeight / rows) - rows/4);
   grid = createGrid(rows, columns, resolution);
+
+  document.getElementById("wfc-reset-button").addEventListener("click", () => {
+    console.log("click")
+    resetGrid(rows, columns, resolution);
+    running = false; // don't start WFC
+    loop();          // redraw the fresh grid
+  })
 }
 
 function draw() {
@@ -288,7 +316,7 @@ function draw() {
 
   // Run one WFC step per frame
   if (!isComplete(grid)) {
-    wfcStep(grid);  // <- collapse one cell, propagate
+    wfcStep(grid);  // collapse one cell, propagate
   } else {
     noLoop();  // stop when finished
   }
@@ -304,6 +332,10 @@ function createGrid(rows, columns, resolution) {
     grid.push(row);
   }
   return grid;
+}
+
+function resetGrid(rows, cols, resolution) {
+  grid = createGrid(rows, cols, resolution); // all tile options available
 }
 
 function isComplete(grid) {
