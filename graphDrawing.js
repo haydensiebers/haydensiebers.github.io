@@ -73,7 +73,7 @@ function setup() {
   n = random(100);
   noiseSeed(n);
   randomSeed(n);
-  graphDrawing = createFullGraph(35, 0.25);
+  graphDrawing = createFullGraph(50, 0.25);
 
   canvas = createCanvas(windowWidth, windowHeight).position(0, 0).style('z-index', '-1');
   canvas.parent("canvas-container");
@@ -81,7 +81,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background(primaryColor);
   noLoop();
 
   for (let [name, vertex] of Object.entries(graphDrawing.vertices)) {
@@ -109,18 +109,7 @@ function createFullGraph(numSubNodes, kernelDistance, edgeWeight = 2) {
 function createMainGraph() {
 
   let graph = new Graph();
-  console.log(graph)
 
-  graph.addVertex("Research", "main", {x: 0.81, y: 0.17});
-  graph.addVertex("Teaching", "main", {x: 0.71, y: 0.36});
-  graph.addVertex("About", "main", {x: 0.86, y: 0.51});
-  graph.addVertex("Fun", "main", {x: 0.75, y: 0.69});
-
-  graph.addEdge("Research", "Teaching", 5);
-  graph.addEdge("Teaching", "About", 5);
-  graph.addEdge("About", "Fun", 5);
-
-  console.log(graph)
   return graph;
 }
 
