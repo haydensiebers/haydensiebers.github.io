@@ -20,6 +20,11 @@ class Cell {
     }
   }
 
+  drawDetails(win) {
+    if (this.options.length === 1) {
+      this.options[0].drawDetails(this.x * this.resolution, this.y * this.resolution, this.resolution, win);
+    }
+  }
   // return the entropy of the cell
   entropy() {
     // TODO: implement entropy logic (e.g., number of options left)
@@ -53,6 +58,7 @@ class Tile {
     this.rightConnection = false;
     this.downConnection = false;
     this.leftConnection = false;
+    this.layer = 0;
   }
 
   // draw a single tile
@@ -63,9 +69,17 @@ class Tile {
     win.pop();
   }
 
+  drawDetails(x, y, size, win) {
+    win.push();
+    win.stroke(whiteColor);
+    win.fill(primaryColor);
+    win.pop();
+  }
+
   styleSettings(win) {
     win.stroke(tertiaryColor);
     win.strokeWeight(8);
+    win.strokeCap(ROUND);
     win.noFill();       // optional
     win.textAlign(CENTER, CENTER);
   }
@@ -73,14 +87,14 @@ class Tile {
 }
 
 class EmptyTile extends Tile {
-  constructor() { super(); }
+  constructor() { super(); this.layer = 1;}
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
   }
 }
 
 class BlankTile extends Tile {
-  constructor() { super(); }
+  constructor() { super(); this.layer = 1;}
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
     // blank, just border
@@ -92,6 +106,7 @@ class TopRightTurnTile extends Tile {
     super();
     this.upConnection = true;
     this.rightConnection = true;
+    this.layer = 2;
   }
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
@@ -108,6 +123,7 @@ class TopLeftTurnTile extends Tile {
     super();
     this.upConnection = true;
     this.leftConnection = true;
+    this.layer = 2;
   }
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
@@ -126,6 +142,7 @@ class BottomRightTurnTile extends Tile {
     super();
     this.downConnection = true;
     this.rightConnection = true;
+    this.layer = 2;
   }
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
@@ -143,6 +160,7 @@ class BottomLeftTurnTile extends Tile {
     super();
     this.downConnection = true;
     this.leftConnection = true;
+    this.layer = 2;
   }
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
@@ -160,6 +178,7 @@ class VerticleTile extends Tile {
     super();
     this.downConnection = true;
     this.upConnection = true;
+    this.layer = 2;
   }
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
@@ -177,6 +196,7 @@ class HorizontalTile extends Tile {
     super();
     this.leftConnection = true;
     this.rightConnection = true;
+    this.layer = 2;
   }
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
@@ -196,6 +216,7 @@ class VerticleCrossingTile extends Tile {
     this.upConnection = true;
     this.leftConnection = true;
     this.rightConnection = true;
+    this.layer = 3;
   }
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
@@ -208,12 +229,22 @@ class VerticleCrossingTile extends Tile {
       win.line(size, size/2, 3*size/4, size/2);
     //VerticalOver
     win.line(size/2, size, size/2, 0);
-    //Shadow
-    win.stroke(0, 0, 0, 100);
-      win.line(size/4, size/2, size/5, size/2);
-      win.line(4*size/5, size/2, 3*size/4, size/2);
     win.pop();
   }
+
+  drawDetails(x, y, size, win) {
+    super.drawDetails(x, y, size, win);
+    super.styleSettings(win);
+
+    //Shadow
+    win.push();
+    win.translate(x, y);
+    win.stroke(0, 0, 0, 100);
+      win.line(size/4, size/2, size/6, size/2);
+      win.line(size*5/6, size/2, 3*size/4, size/2);
+    win.pop();
+  }
+
 }
 
 class HorizontalCrossingTile extends Tile {
@@ -223,6 +254,7 @@ class HorizontalCrossingTile extends Tile {
     this.upConnection = true;
     this.leftConnection = true;
     this.rightConnection = true;
+    this.layer = 3;
   }
   draw(x, y, size, win) {
     super.draw(x, y, size, win);
@@ -236,13 +268,22 @@ class HorizontalCrossingTile extends Tile {
         win.line(size/2, size, size/2, 3*size/4);
     //HorizontalOver
     win.line(size, size/2, 0, size/2);
-    //Shadow
-    win.stroke(0, 0, 0, 100);
-        win.line(size/2, size/4, size/2, size/5);
-        win.line(size/2, 4*size/5, size/2, 3*size/4);
-
     win.pop();
   }
+
+  drawDetails(x, y, size, win) {
+    super.drawDetails(x, y, size, win);
+    super.styleSettings(win);
+
+    //Shadow
+    win.push();
+    win.translate(x, y);
+    win.stroke(0, 0, 0, 100);
+        win.line(size/2, size/4, size/2, size/6);
+        win.line(size/2, size*5/6, size/2, 3*size/4);
+    win.pop();
+  }
+
 }
 
 let canvas;
@@ -259,6 +300,7 @@ const tertiaryColor = styles.getPropertyValue('--color-tertiary').trim();
 const accentColor = styles.getPropertyValue('--color-accent').trim();
 const whiteColor = styles.getPropertyValue('--white').trim();
 const blackColor = styles.getPropertyValue('--black').trim();
+const msuGreenColor = styles.getPropertyValue('--color-msu-green').trim();
 
 
 
@@ -311,6 +353,14 @@ function draw() {
   for (let row of grid) {
     for (let cell of row) {
       cell.draw(this);
+
+    }
+  }
+
+  for (let row of grid) {
+    for (let cell of row) {
+      cell.drawDetails(this);
+
     }
   }
 

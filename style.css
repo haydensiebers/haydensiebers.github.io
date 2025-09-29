@@ -48,6 +48,10 @@
     --font-size-heading: 2em;
 }
 
+.textNormal {
+  font-style: normal;
+}
+
 /* General Layout */
 :root {
   --padding-base: 16px;
@@ -107,6 +111,11 @@ main {
 
 .twentyPercentPadded{
   padding: calc(0.2 * var(--padding-base));
+}
+
+.oneSeventhPaddedSides{
+  padding-left: calc(1/7 * 100vw);
+  padding-right: calc(1/7 * 100vw);
 }
 
 .justifySpaceBetween{
@@ -183,6 +192,27 @@ button {
 button:hover {
   background-color: color-mix(in srgb, var(--color-accent) 80%, black);
 }
+
+.paper {
+}
+
+.paper p {
+  text-indent: 2em; /* adjust as you like */
+}
+
+.paper .formula {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  font-style: italic;
+}
+
+.paper p.workCited {
+  /* Hanging indent for works cited */
+  text-indent: -2em;
+  margin-left: 2em;
+}
+
 
 
 /* Header Styles */
