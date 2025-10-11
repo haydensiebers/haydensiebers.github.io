@@ -318,13 +318,21 @@ let tileOptions = [
 
 
 function windowResized() {
-  resizeCanvas(canvas.parent().clientWidth, canvas.parent().clientHeight);
+  let size = min(canvas.parent().clientWidth, canvas.parent().clientHeight);
+  resizeCanvas(size, size);
+  
+  let rows = 7;
+  let columns = 7;
+  let resolution = (size / rows) - rows/4;
+  grid = createGrid(rows, columns, resolution);
 }
 
 function setup() {
-  canvas = createCanvas(250, 250);
-  canvas.parent("canvas-container");
-  resizeCanvas(canvas.parent().clientWidth, canvas.parent().clientHeight);
+  canvas = createCanvas(1, 1);
+  canvas.parent("knotwfc-canvas-container");
+
+  let size = min(canvas.parent().clientWidth, canvas.parent().clientHeight);
+  resizeCanvas(size, size);
 
   // create tiles
   let blank = new BlankTile();
@@ -333,10 +341,10 @@ function setup() {
   let br = new BottomRightTurnTile();
   let bl = new BottomLeftTurnTile();
 
-  // make a 3x3 grid of cells with chosen tiles
+  // make a grid of cells with chosen tiles
   let rows = 7;
   let columns = 7;
-  let resolution = ((canvas.parent().clientHeight / rows) - rows/4);
+  let resolution = (width / rows); 
   grid = createGrid(rows, columns, resolution);
 
   document.getElementById("wfc-reset-button").addEventListener("click", () => {

@@ -11,7 +11,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
 
-  <script src="graphDrawing.js" defer></script>
+  <script src="persistentHomologyDrawing.js" defer></script>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -33,8 +33,9 @@
 
 </header>
 
+<div id="background-canvas-container"></div>
+
 <main>
-  <div id="canvas-container"></div>
 
   <!--
   <div class="container column">
@@ -50,43 +51,19 @@
   <div class="greendiv doublePadded oneSeventhPaddedSides">
     <div class="horizontal justifySpaceBetween">
       <div class="photo padded">
-        Photo
+        <img src="src/photos/me.jpg" alt="Photo of me" class="profile-photo">
       </div>
       <div class="text-block padded">
+        <h2>
+          Hi! I'm Hayden Siebers
+        </h2>
         <p>
-          Text
+          I am a first year PhD student in Mathematics at Michigan State University. 
         </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="accentdiv full-width center">
-    <div class="padded">
-      Accent
-    </div>
-  </div>
-
-  <div class="primarydiv full-width center">
-    <div class="padded">
-      Primary
-    </div>
-  </div>
-
-  <div class="secondarydiv full-width center">
-    <div class="padded">
-      Secondary
-    </div>
-  </div>
-
-  <div class="tertiarydiv center">
-    <div class="padded">
-      Tertiary
-    </div>
-  </div>
-
-  <div class="primarydiv full-width center">
-    <div class="padded accent">
-      Accented Primary
+        <p>
+          My current interests are in topology, data, and math education.
+        </p>
+        </div>
     </div>
   </div>
 

@@ -33,6 +33,12 @@ class Graph {
     }
   }
 
+  clearEdges() {
+    for (let vertex of Object.values(this.vertices)) {
+      vertex.edges = [];
+    }
+  }
+
   healGraph(kernelDistance, edgeWeight = 2) {
     /* add edges between vertices that are within kernelDistance of each other */
     const names = Object.keys(this.vertices);
@@ -41,12 +47,19 @@ class Graph {
         const v1 = this.vertices[names[i]];
         const v2 = this.vertices[names[j]];
         const dx = v1.position.x - v2.position.x;
-        const dy = v1.position.y - v2.position.y;
+        const dy = (v1.position.y - v2.position.y) * (height / width);
         const distance = Math.sqrt(dx * dx + dy * dy);
+        
         if (distance <= kernelDistance) {
-          this.addEdge(names[i], names[j], edgeWeight);
-          this.addEdge(names[j], names[i], edgeWeight);
+          // only add if edge doesn’t exist yet
+          if (!v1.edges.some(e => e.to === names[j])) {
+            this.addEdge(names[i], names[j], edgeWeight);
+          }
+          if (!v2.edges.some(e => e.to === names[i])) {
+            this.addEdge(names[j], names[i], edgeWeight);
+          }
         }
+
       }
     }
   }
@@ -59,10 +72,11 @@ const tertiaryColor = styles.getPropertyValue('--color-tertiary').trim();
 const accentColor = styles.getPropertyValue('--color-accent').trim();
 const whiteColor = styles.getPropertyValue('--white').trim();
 const blackColor = styles.getPropertyValue('--black').trim();
+const msuGreenColor = styles.getPropertyValue('--color-msu-green').trim();
 
 const fontSizeBase = parseInt(styles.getPropertyValue('--font-size-base'));
 
-let canvas;
+var canvas;
 let graphDrawing;
 
 function windowResized() {
@@ -73,35 +87,55 @@ function setup() {
   n = random(100);
   noiseSeed(n);
   randomSeed(n);
-  graphDrawing = createFullGraph(35, 0.25);
+  graphDrawing = createFullGraph(200, 0.25);
 
-  canvas = createCanvas(windowWidth, windowHeight).position(0, 0).style('z-index', '-1');
-  canvas.parent("canvas-container");
-  resizeCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent('background-canvas-container');
+  
 }
 
+let ballRadius = 0;
+
 function draw() {
-  background(255);
-  noLoop();
+  background(primaryColor);
+  
+  let maxDistance = 0.06;
+
+  frameRate(10);
+
+  // how many frames for a full up+down
+  let period = 100;
+  ballRadius = maxDistance * (1 - abs(((frameCount) % (2*period)) / period - 1));
+
+  let edgeWeight = 2;
+
+
+  for (let [name, vertex] of Object.entries(graphDrawing.vertices)) {
+      drawKernelCircle(name, vertex);
+  }
+
+  let triangleList = findTriangles(graphDrawing);
+  for (let tri of triangleList) {
+    drawTriangle(tri, graphDrawing);
+  }
 
   for (let [name, vertex] of Object.entries(graphDrawing.vertices)) {
       drawEdges(name, vertex, graphDrawing);
   }
+
   for (let [name, vertex] of Object.entries(graphDrawing.vertices)) {
-      drawNode(name, vertex, "sub");
-  }
-  for (let [name, vertex] of Object.entries(graphDrawing.vertices)) {
-      drawNode(name, vertex, "main");
+      drawNode(name, vertex);
   }
 
+  graphDrawing.clearEdges();
+  graphDrawing.healGraph(ballRadius, edgeWeight);
 }
 
 function createFullGraph(numSubNodes, kernelDistance, edgeWeight = 2) {
   let graph = createMainGraph();
-  let subGraph = createRandomSubGraph(numSubNodes);
 
-  graph.addGraph(subGraph);
-  graph.healGraph(kernelDistance, edgeWeight);
+  let g = createDistributionGraph(numSubNodes, (x, y) => Math.tan(-3*(x-1)-3.14/2)/4 + 0.75 - y, 0.2);
+  graph.addGraph(g);
 
   return graph;
 }
@@ -109,28 +143,26 @@ function createFullGraph(numSubNodes, kernelDistance, edgeWeight = 2) {
 function createMainGraph() {
 
   let graph = new Graph();
-  console.log(graph)
 
-  graph.addVertex("Research", "main", {x: 0.81, y: 0.17});
-  graph.addVertex("Teaching", "main", {x: 0.71, y: 0.36});
-  graph.addVertex("About", "main", {x: 0.86, y: 0.51});
-  graph.addVertex("Fun", "main", {x: 0.75, y: 0.69});
+  let mainNodes = [
+    {name: "A", x: 0.1, y: 0.6},
+    {name: "B", x: 0.1, y: 0.6},
+    {name: "C", x: 0.2, y: 0.7},
+    {name: "D", x: 0.2, y: 0.7},
+  ]
 
-  graph.addEdge("Research", "Teaching", 5);
-  graph.addEdge("Teaching", "About", 5);
-  graph.addEdge("About", "Fun", 5);
+  for (let node of mainNodes) {
+    graph.addVertex(node.name, "sub", {x: node.x, y: node.y});
+  }
 
-  console.log(graph)
   return graph;
 }
 
 function createRandomSubGraph(numNodes) {
   let graph = new Graph();
-  console.log(1)
   for (let i = 0; i < numNodes; i++) {
-    console.log(i)
-    let x = random(-0.1, 1.1);
-    let y = random(-0.1, 1.1);
+    let x = random(0.4, 0.95);
+    let y = random(-0.05, 1.05);
 
     graph.addVertex(`Sub${i}`, "sub", {x, y});
 
@@ -139,46 +171,59 @@ function createRandomSubGraph(numNodes) {
   return graph;
 }
 
-function drawNode(name, vertex, classificationFilter = null) {
+function createDistributionGraph(numNodes, equation, sigma = 0.05) {
+  let graph = new Graph(); // assuming your Graph class
+  let tries = 0;
+
+  while (Object.keys(graph.vertices).length < numNodes && tries < numNodes * 1000) {
+    tries++;
+
+    // sample uniform candidate point
+    let x = random(-0.1, 1.1); // [0,1] normalized
+    let y = random(-0.1, 1.1); // [0,1] normalized
+
+    // signed "distance" from curve
+    let d = Math.abs(equation(x, y));
+
+    // acceptance probability: closer points more likely
+    let p = Math.exp(-d / sigma);
+
+    if (random() < p) {
+      let name = "v" + Object.keys(graph.vertices).length;
+      graph.addVertex(name, "main", { x, y });
+    }
+  }
+
+  return graph;
+}
+
+function drawNode(name, vertex) {
+    strokeWeight(2);
+    diameter = max(2, width/200, height/200)
+
     vertexX = vertex.position.x * width;
     vertexY = vertex.position.y * height;
-
-    diameter = max(10, width/20, height/20)
-    if ((vertex.classification !== classificationFilter) && (classificationFilter !== null)) {
-        return;
-    }
-    if (vertex.classification === "main") {
-      drawMainNode(name, vertex);
-    } 
-    if (vertex.classification === "sub") {
-      drawSubNode(name, vertex);
-    }
+    
+    //node
+    fill(blackColor);
+    stroke(blackColor);
+    circle(vertexX, vertexY, diameter);
 
 }
 
-function drawMainNode(name, vertex) {
-  fill(whiteColor);
-  stroke(accentColor);
-  strokeWeight(2);
-
-  vertexX = vertex.position.x * width;
-  vertexY = vertex.position.y * height;
-  
-  handdrawnCicle(vertexX, vertexY, diameter, 9, 3);
-  /*
-  textAlign(CENTER, CENTER);
-  text(str(name), vertexX - (str(name).length)*fontSizeBase, vertexY);
-  */
-}
-
-function drawSubNode(name, vertex) {
-    fill(primaryColor);
-    stroke(secondaryColor);
+function drawKernelCircle(name, vertex) {
     strokeWeight(2);
 
     vertexX = vertex.position.x * width;
     vertexY = vertex.position.y * height;
-    handdrawnCicle(vertexX, vertexY, diameter/2, 6, 1);
+    
+    //kernelCircle
+    let c = color(msuGreenColor);
+    c.setAlpha(10);
+    fill(c);
+    stroke(c);
+    circle(vertexX, vertexY, 2*ballRadius*width);
+
 }
 
 function drawEdges(name, vertex, graph) {
@@ -191,34 +236,59 @@ function drawEdges(name, vertex, graph) {
         let targetY = targetVertex.position.y * height;
 
         if (vertex.classification === "main" && targetVertex.classification === "main") {
-            stroke(secondaryColor);
+            stroke(msuGreenColor);
         } else {
-            stroke(secondaryColor);
+            stroke(msuGreenColor);
         }
         strokeWeight(edge.weight);
         line(vertexX, vertexY, targetX, targetY);
     }
 }
 
-function handdrawnCicle(x, y, diameter, numPoints = 4, jitter = 1) {
-  let radius = diameter / 2; 
-  let numLines = 5; // number of overlapping lines for hand-drawn effect
+function drawTriangle(tri, graph) {
+  let [a, b, c] = tri.map(name => graph.vertices[name]);
 
-  
-  for (let l = 0; l < numLines; l++) {
-    beginShape();
-    for (let i = 0; i < numPoints; i++) {
-      let angle = map(i, 0, numPoints, 0, TWO_PI);
-      let r = radius; // jittered radius
-      let positionX = x + r * cos(angle + random(-jitter, jitter)/50) + random(-jitter, jitter);
-      let positionY = y + r * sin(angle + random(-jitter, jitter)/50) + random(-jitter, jitter);
-      
-      // curveVertex makes it smoother
-      curveVertex(positionX, positionY);
+  let ax = a.position.x * width;
+  let ay = a.position.y * height;
+  let bx = b.position.x * width;
+  let by = b.position.y * height;
+  let cx = c.position.x * width;
+  let cy = c.position.y * height;
+
+  let cFill = color(tertiaryColor);
+  cFill.setAlpha(50);
+  fill(cFill);
+  noStroke();
+
+  triangle(ax, ay, bx, by, cx, cy);
+}
+
+function findTriangles(graph) {
+  let triangles = [];
+  let seen = new Set();
+
+  const names = Object.keys(graph.vertices);
+
+  for (let a of names) {
+    let neighborsA = graph.getNeighbors(a);
+
+    for (let i = 0; i < neighborsA.length; i++) {
+      for (let j = i + 1; j < neighborsA.length; j++) {
+        let b = neighborsA[i];
+        let c = neighborsA[j];
+
+        // check if b and c are connected
+        if (graph.getNeighbors(b).includes(c)) {
+          let triangle = [a, b, c].sort(); // canonical order
+          let key = triangle.join("-");
+
+          if (!seen.has(key)) {
+            seen.add(key);
+            triangles.push(triangle);
+          }
+        }
+      }
     }
-    endShape(CLOSE);
-    noFill();
   }
-
-  endShape(CLOSE);
+  return triangles;
 }
