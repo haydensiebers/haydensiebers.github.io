@@ -263,10 +263,10 @@ footer {
 
 /* Responsive header for small screens */
 @media (max-width: 600px) {
-  header {
+  .horizontal {
+    flex-direction: column;
   }
 }
-
 /* Canvas Styles */
 
 #background-canvas-container {
