@@ -139,6 +139,11 @@ div {
   flex-direction: row;
 }
 
+.horizontalAlways {
+  display: flex;
+  flex-direction: row;
+}
+
 .vertical {
   display: flex;
   flex-direction: column;
@@ -229,6 +234,22 @@ button:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* subtle shadow */
 }
 
+#grid {
+  display: grid;
+  grid-template-columns: repeat(var(--number-of-columns), var(--cell-size));
+  gap: 5px;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background: var(--color-primary);
+}
+
+.cell.on {
+  background: var(--color-accent);
+}
+
 /* Header Styles */
 
 header {
@@ -277,6 +298,8 @@ footer {
   height: 100%;
   z-index: -1;
   pointer-events: none;
+  overflow: hidden;
+
 }
 
 #knotwfc-canvas-container {
@@ -286,4 +309,6 @@ footer {
   width: min(200px, 40vw); /* Responsive but capped */
   height: min(200px, 40vw);
   flex-shrink: 0;
+  overflow: hidden;
+
 }

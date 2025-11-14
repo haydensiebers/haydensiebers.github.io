@@ -134,7 +134,7 @@ function draw() {
 function createFullGraph(numSubNodes, kernelDistance, edgeWeight = 2) {
   let graph = createMainGraph();
 
-  let g = createDistributionGraph(numSubNodes, (x, y) => Math.tan(-3*(x-1)-3.14/2)/4 + 0.75 - y, 0.2);
+  let g = createDistributionGraph(numSubNodes, (x, y) => Math.tan(-3*(x-1))/4 + 0.75 - y, 0.2);
   graph.addGraph(g);
 
   return graph;

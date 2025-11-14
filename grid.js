@@ -1,6 +1,6 @@
 
-const columns = 17;
-let rows = 37;
+const columns = 11;
+let rows = 3;
 
 let windowWidth = window.innerWidth;
 

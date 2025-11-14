@@ -323,8 +323,11 @@ function windowResized() {
   
   let rows = 7;
   let columns = 7;
-  let resolution = (size / rows) - rows/4;
+  let resolution = (size / rows);
   grid = createGrid(rows, columns, resolution);
+
+  loop(); // redraw the fresh grid
+
 }
 
 function setup() {
@@ -348,7 +351,6 @@ function setup() {
   grid = createGrid(rows, columns, resolution);
 
   document.getElementById("wfc-reset-button").addEventListener("click", () => {
-    console.log("click")
     resetGrid(rows, columns, resolution);
     running = false; // don't start WFC
     loop();          // redraw the fresh grid

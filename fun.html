@@ -43,7 +43,7 @@
                         <p>Create a random knot or link using the wave function collapse algorithm.</p>
                     </div>
                     <div class="controls justifySpaceBetween halfPadded">
-                        <!-- <div class="horizontal">
+                        <!-- <div class="horizontalAlways">
                             <p class="noBreak center halfPadded">Grid Size:</p>
                             <input type="number" id="grid-size" min="2" max="20" value="5">
                         </div> -->
@@ -52,10 +52,9 @@
 
                 </div>
 
-                <div class="padded">
-                    <div id="knotwfc-canvas-container"></div>
+                <div id="knotwfc-canvas-container">
                     <script src="knotWFC.js"></script>
-                </div>  
+                </div>
             </div>
         </div>
 
@@ -64,7 +63,7 @@
                 <div class="padded">
                     <div>
                         <h2>Essay</h2>
-                        <div class="horizontal">
+                        <div class="horizontalAlways">
                             <p class="padded">
                                 <a href="information72letters.html">Information in Seventy Letters</a>
                             </p>                            
@@ -78,6 +77,26 @@
                 </div>
             </div>
         </div>
+
+    <div class="full-width doublePadded secondarydiv oneSeventhPaddedSides">
+        Box Step
+        <div class="padded">
+            <h2>Box Step</h2>
+            <div id="boxstep"></div>   <!-- This is where the canvas will attach -->
+        </div>
+        <script src="boxStep.js"></script>
+    </div>
+
+        <!--
+        <div class="full-width doublePadded secondarydiv oneSeventhPaddedSides">
+             Grid 
+             <div class="padded">
+                <h2>Grid 2</h2>
+                <div id="grid">
+                </div>
+            </div>
+            <script src="grid.js"></script>
+        </div> -->
 
     </main>
 
