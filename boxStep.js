@@ -1,21 +1,52 @@
 let boxStepSketch = (p) => {
-  const LIFETIME = 10;
+  const LIFETIME = 100;
   let boxes = [];
   let lastSpawn = 0;
   let step = -2;
-  let theta = 0;
-  let deltaTheta = 3 * Math.PI / 180;
-  let stepSize = 10;
-  let gapSize = 5;
+
+  function getTheta(step) {
+    return (step + 2) * (5 * Math.PI / 180);  // 4° per step
+  }
+
+  let stepSize = 30;
+  let stepRatio = 1.6180339887;
+  let gapSize = 15;
+
+
 
   // Independent state
   let leftState = { x: null, y: null };
   let rightState = { x: null, y: null };
 
   p.setup = () => {
-    p.createCanvas(300, 300);
+    p.createCanvas(250, 250);
     p.rectMode(p.CENTER);
     p.background(240);
+
+
+    document.getElementById("boxStep-reset-button").addEventListener("click", () => {
+      resetSketch(); // resets the animation
+      p.loop();
+      pauseBtn.textContent = "⏸";
+    })
+
+    const pauseBtn = document.getElementById("boxStep-pause-button");
+    let isPaused = false;
+
+    pauseBtn.addEventListener("click", () => {
+      if (isPaused) {
+        // Resume
+        p.loop();
+        pauseBtn.textContent = "⏸";
+      } else {
+        // Pause
+        p.noLoop();
+        pauseBtn.textContent = "▶";
+      }
+
+      isPaused = !isPaused;
+    });
+
   };
 
   p.draw = () => {
@@ -30,7 +61,7 @@ let boxStepSketch = (p) => {
     }
 
     // Draw & fade boxes
-    for (let i = boxes.length - 1; i >= 0; i--) {
+    for (let i = 0; i <= boxes.length - 1; i++) {
       let b = boxes[i];
       let age = t - b.born;
       let fade = p.map(age, 0, LIFETIME, 255, 0);
@@ -41,9 +72,17 @@ let boxStepSketch = (p) => {
       }
 
       p.noStroke();
+
+      if (i > boxes.length - 7) {
+        p.stroke(0);
+        p.strokeWeight(2);
+      } else {
+        p.noStroke();
+      }
+  
       p.fill(b.color[0], b.color[1], b.color[2], fade);
       p.circle(b.x, b.y, b.size, b.size);
-      //p.rect(b.x, b.y, b.size);
+      //p.rect(b.x, b.y, b.size, b.size);
 
     }
   };
@@ -80,22 +119,23 @@ let boxStepSketch = (p) => {
       switch (mod6) {
         case 0: // L0 behavior
 
-          //leftState.x += 0;
-          //leftState.y -= stepSize;
-
-          leftState.x += 3*stepSize*sin(theta);
-          leftState.y -= 3*stepSize*cos(theta);
+          leftState.x += stepSize*sin(theta);
+          leftState.y -= stepSize*cos(theta);
 
           break;
 
         case 2: // L1 behavior
-          leftState.x += 4*stepSize*cos(theta);
-          leftState.y += 4*stepSize*sin(theta);
+          leftState.x += stepRatio*stepSize*cos(theta);
+          leftState.y += stepRatio*stepSize*sin(theta);
           break;
 
         case 4: // L2 behavior
-          leftState.x += 5*stepSize*cos((theta+Math.PI-0.6435));
-          leftState.y += 5*stepSize*sin((theta+Math.PI-0.6435));
+
+          leftState.x -= stepSize*sin(theta);
+          leftState.y += stepSize*cos(theta);
+
+          leftState.x -= stepRatio*stepSize*cos(theta);
+          leftState.y -= stepRatio*stepSize*sin(theta);
           break;
       }
 
@@ -109,18 +149,36 @@ let boxStepSketch = (p) => {
     if (side === "right") {
       switch (mod6) {
         case 1: // R0 behavior
-          rightState.x += 5*stepSize*cos((-theta+0.6435));
-          rightState.y -= 5*stepSize*sin((-theta+0.6435));
+
+
+          //rightState.x = leftState.x + gapSize*cos(-theta);
+          //rightState.y = leftState.y + gapSize*sin(-theta);
+      
+          rightState.x -= stepSize*sin(-theta);
+          rightState.y -= stepSize*cos(-theta);
+
+          rightState.x += stepRatio*stepSize*cos(-theta);
+          rightState.y -= stepRatio*stepSize*sin(-theta);
+
           break;
 
         case 3: // R1 behavior
-          rightState.x += 3*stepSize*sin(-theta);
-          rightState.y += 3*stepSize*cos(-theta);
+
+          //rightState.x = leftState.x + gapSize*cos(-theta);
+          //rightState.y = leftState.y + gapSize*sin(-theta);
+
+          rightState.x += stepSize*sin(-theta);
+          rightState.y += stepSize*cos(-theta);
           break;
 
         case 5: // R2 behavior
-          rightState.x -= 4*stepSize*cos(-theta);
-          rightState.y += 4*stepSize*sin(-theta);
+
+          // Set position relative to left state
+          rightState.x = leftState.x + gapSize*cos(-theta);
+          rightState.y = leftState.y - gapSize*sin(-theta);
+
+          //rightState.x -= stepRatio*stepSize*cos(-theta);
+          //rightState.y += stepRatio*stepSize*sin(-theta);
           break;
       }
 
@@ -130,8 +188,21 @@ let boxStepSketch = (p) => {
 
     boxes.push(box);
     step++;
-    theta += deltaTheta;
+    theta = getTheta(step);
   }
+
+  function resetSketch() {
+    boxes = [];
+    lastSpawn = 0;
+    theta = 0;
+    step = -2;
+    leftState = { x: null, y: null };
+    rightState = { x: null, y: null };
+  };
+
+
+
+
 };
 
 new p5(boxStepSketch, "boxstep");
