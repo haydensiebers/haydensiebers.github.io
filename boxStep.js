@@ -5,7 +5,7 @@ let boxStepSketch = (p) => {
   let step = -2;
 
   function getTheta(step) {
-    return (step + 2) * (5 * Math.PI / 180);  // 4° per step
+    return (step + 2) * (4.5 * Math.PI / 180);  // 4° per step
   }
 
   let stepSize = 30;
