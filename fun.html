@@ -60,30 +60,68 @@
         </div>
 
 
-    <div class="full-width doublePadded oneSeventhPaddedSides">
-        <div class="horizontal justifySpaceBetween">
+        <div class="full-width doublePadded oneSeventhPaddedSides">
+            <div class="horizontal justifySpaceBetween">
 
-            <div class="padded">
+                <div class="padded">
 
-                <h2>Box Step</h2>
-                <p>Create a pattern based on the basic ballroom dance step</p>
+                    <h2>Box Step</h2>
+                    <p>Create a pattern based on the basic ballroom dance step</p>
 
-                <div class="controls halfPadded">
+                    <div class="controls halfPadded">
 
-                    <button id="boxStep-reset-button" class="halfPadded">Restart</button>
+                        <button id="boxStep-reset-button" class="halfPadded">Restart</button>
+                        
+                        <button id="boxStep-pause-button" class="halfPadded">⏸</button>
                     
-                    <button id="boxStep-pause-button" class="halfPadded">⏸</button>
-                
+                    </div>
+
                 </div>
+                
+                <div id="boxstep">
+                    <script src="boxStep.js"></script>
+                </div>   <!-- This is where the canvas will attach -->
 
             </div>
-            
-            <div id="boxstep">
-                <script src="boxStep.js"></script>
-            </div>   <!-- This is where the canvas will attach -->
-
         </div>
-    </div>
+
+        <div class="full-width doublePadded secondarydiv oneSeventhPaddedSides">
+            <div class="horizontal justifySpaceBetween">
+
+                <div class="padded">
+
+                    <h2>Spiral</h2>
+                    <p>Create a spiral pattern with spokes near rational numbers</p>
+
+                    <div class="controls halfPadded">
+
+                        <button id="spiralRatio-reset-button" class="halfPadded">Restart</button>
+                        
+                        <button id="spiralRatio-pause-button" class="halfPadded">⏸</button>
+                    
+                        <input
+                            id="spiralRatio-slider"
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.001"
+                            value="0.618"
+                        />
+
+                        <span id="spiralRatio-value" class="colorTertiary">0.618</span>
+
+                        <button id="spiralRatio-golden-btn" class="halfPadded">φ</button>
+
+                    </div>
+
+                </div>
+                
+                <div id="spiralRatio">
+                    <script src="spiralRatio.js"></script>
+                </div>   
+
+            </div>
+        </div>
 
         <!--
         <div class="full-width doublePadded secondarydiv oneSeventhPaddedSides">

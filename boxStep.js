@@ -79,8 +79,8 @@ let boxStepSketch = (p) => {
       } else {
         p.noStroke();
       }
-  
-      p.fill(b.color[0], b.color[1], b.color[2], fade);
+
+      p.fill(p.red(b.color), p.green(b.color), p.blue(b.color), fade);
       p.circle(b.x, b.y, b.size, b.size);
       //p.rect(b.x, b.y, b.size, b.size);
 
@@ -96,7 +96,7 @@ let boxStepSketch = (p) => {
       born: time,
       x: 0,
       y: 0,
-      color: side === "left" ? [50, 100, 255] : [50, 200, 50]
+      color: side === "left" ? p.color(accentColor) : p.color(tertiaryColor)
     };
 
     // -------------------------------
