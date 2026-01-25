@@ -21,20 +21,8 @@
 
 <body>
 
-<header>
-  
-  <a class="title-name", href="index.html">
-      Hayden Siebers
-  </a>  
-    
-<nav>
-    <!-- <a href="research.html">Research</a> -->
-    <!-- <a href="teaching.html" class = "halfPadded">Teaching</a>
-    <a href="about.html" class = "halfPadded">About</a> -->
-    <a href="fun.html" class = "halfPadded">Fun</a>
-</nav>
+  <div id="header"></div>
 
-</header>
 
 <main>
 
@@ -257,28 +245,20 @@
 
 </main>
 
-    <footer>
-        <div>
-            <div>
-                Hayden Siebers <span id="year"></span>
-            </div>
-            
-            <div>
-                <img src="src/icons/mail-icon.svg" alt="Email" class="icon">
-                <span>siebersh@msu.edu</span>
-            </div>
-        </div>
-
-        <div>
-            <img src="src/icons/peace-icon.svg" alt="Email" class="icon">
-        </div>
-
-        
-    </footer>
+  <div id="footer"></div>
 
 
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+
+  <script>
+      fetch('partials/header.html')
+        .then(response => response.text())
+        .then(data => document.getElementById('header').innerHTML = data);
+
+      fetch('partials/footer.html')
+        .then(response => response.text())
+        .then(data => document.getElementById('footer').innerHTML = data);
+      
+      document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
 </body>

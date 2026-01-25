@@ -18,68 +18,47 @@
 
 <body>
 
-<header>
-  
-  <a class="title-name", href="index.html">
-      Hayden Siebers
-  </a>  
-    
-  <nav>
-    <!-- <a href="research.html">Research</a> -->
-    <!-- <a href="teaching.html" class = "halfPadded">Teaching</a>
-    <a href="about.html" class = "halfPadded">About</a> -->
-    <a href="fun.html" class = "halfPadded">Fun</a>
-  </nav>
+  <div id="header"></div>
 
-</header>
+  <div id="background-canvas-container"></div>
 
-<div id="background-canvas-container"></div>
+  <main>
 
-<main>
+    <div class="greendiv doublePadded oneSeventhPaddedSides">
+      <div class="horizontal justifySpaceBetween">
+        <div class="photo padded">
+          <img src="src/photos/me.jpg" alt="Photo of me" class="profile-photo">
+        </div>
 
-  <div class="greendiv doublePadded oneSeventhPaddedSides">
-    <div class="horizontal justifySpaceBetween">
-      <div class="photo padded">
-        <img src="src/photos/me.jpg" alt="Photo of me" class="profile-photo">
+        <div class="text-block padded">
+          <h2>
+            Hi! I'm Hayden Siebers
+          </h2>
+          <p>
+            I am a first year PhD student in Mathematics at Michigan State University. 
+          </p>
+          <p>
+            My current interests are in topology, data, and math education.
+          </p>
+          </div>
       </div>
-
-      <div class="text-block padded">
-        <h2>
-          Hi! I'm Hayden Siebers
-        </h2>
-        <p>
-          I am a first year PhD student in Mathematics at Michigan State University. 
-        </p>
-        <p>
-          My current interests are in topology, data, and math education.
-        </p>
-        </div>
     </div>
-  </div>
 
-</main>
+  </main>
 
-    <footer>
-        <div>
-            <div>
-                Hayden Siebers <span id="year"></span>
-            </div>
-            
-            <div>
-                <img src="src/icons/mail-icon.svg" alt="Email" class="icon">
-                <span>siebersh@msu.edu</span>
-            </div>
-        </div>
-
-        <div>
-            <img src="src/icons/peace-icon.svg" alt="Email" class="icon">
-        </div>
-        
-    </footer>
+  <div id="footer"></div>
 
 
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+  <script>
+      fetch('partials/header.html')
+        .then(response => response.text())
+        .then(data => document.getElementById('header').innerHTML = data);
+
+      fetch('partials/footer.html')
+        .then(response => response.text())
+        .then(data => document.getElementById('footer').innerHTML = data);
+      
+      document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
 </body>

@@ -254,7 +254,7 @@ button:hover {
 
 header {
   background-color: var(--color-primary);
-  padding: var(--padding-base);
+  padding: var(--padding-base) calc(2 * var(--padding-base));
   min-height: var(--header-height);
   justify-content: space-between;
   display: flex;
@@ -276,7 +276,7 @@ footer {
   color: var(--color-primary);
   min-height: var(--footer-height);
   font-size: 0.9em;
-  padding: var(--padding-base);
+  padding: var(--padding-base) calc(2 * var(--padding-base));
 
   display: flex;
   justify-content: space-between;
