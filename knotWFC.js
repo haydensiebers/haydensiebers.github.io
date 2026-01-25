@@ -358,7 +358,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background(secondaryColor);
 
   for (let row of grid) {
     for (let cell of row) {

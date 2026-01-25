@@ -23,7 +23,7 @@ let spiralRatioSketch = (p) => {
   p.setup = () => {
     p.createCanvas(250, 250);
     p.rectMode(p.CENTER);
-    p.background(240);
+    p.background(secondaryColor);
 
     const pauseBtn = document.getElementById("spiralRatio-pause-button");
     let isPaused = false;
@@ -62,7 +62,7 @@ let spiralRatioSketch = (p) => {
   };
 
   p.draw = () => {
-    p.background(240);
+    p.background(secondaryColor);
 
     const t = p.millis() / 100;
 
@@ -129,8 +129,6 @@ let spiralRatioSketch = (p) => {
 
     let angle = (seedNumber * ratio * p.TAU) % p.TAU;
     let radius = radialStepSize*radialStepSizeModifier;    
-
-    console.log(radialStepSizeModifier);
 
     let xDisplacement = p.cos(angle) * radius;
     let yDisplacement = p.sin(angle) * radius;

@@ -4,7 +4,7 @@
     --black: #000;
     --white: #fff;
     --color-primary: #fbf7f3;
-    --color-secondary:#18453b2a;
+    --color-secondary: #DAE1E0;
     --color-msu-green: #18453B;
     --color-tertiary: #6777dc;
     --color-accent: #f4b642;
@@ -216,11 +216,15 @@ button:hover {
   text-indent: 2em; /* adjust as you like */
 }
 
-.paper .formula {
+.formula {
   display: block;
   text-align: center;
   margin: 1em 0;
   font-style: italic;
+}
+
+.formula * {
+  overflow: visible !important;
 }
 
 .paper p.workCited {
@@ -309,8 +313,8 @@ footer {
   pointer-events: none;
   min-width: 70px;
   min-height: 70px;
-  width: min(200px, 40vw); /* Responsive but capped */
-  height: min(200px, 40vw);
+  width: min(250px, 40vw); /* Responsive but capped */
+  height: min(250px, 40vw);
   flex-shrink: 0;
   overflow: hidden;
 

@@ -1,3 +1,5 @@
+
+
 let boxStepSketch = (p) => {
   const LIFETIME = 100;
   let boxes = [];
@@ -21,7 +23,7 @@ let boxStepSketch = (p) => {
   p.setup = () => {
     p.createCanvas(250, 250);
     p.rectMode(p.CENTER);
-    p.background(240);
+    p.background(primaryColor);
 
 
     document.getElementById("boxStep-reset-button").addEventListener("click", () => {
@@ -50,7 +52,7 @@ let boxStepSketch = (p) => {
   };
 
   p.draw = () => {
-    p.background(240);
+    p.background(primaryColor);
 
     const t = p.millis() / 100;
 
