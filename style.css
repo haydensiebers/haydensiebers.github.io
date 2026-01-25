@@ -38,7 +38,7 @@
 
 /* Typography */
 :root {
-    --font-body: "Overpass";
+    --font-body: 'Overpass', system-ui, sans-serif;
     --font-heading: "Overpass";
     --title-name-font: "Overpass";
     --title-name-weight: 700;
@@ -72,6 +72,8 @@
 
 body {
   font-family: var(--font-body);
+  font-display: swap;
+
   background-color: var(--color-primary);
   color: var(--black);
   line-height: 1.6;
@@ -80,6 +82,7 @@ body {
 
   min-height: 100vh;
   position: relative;
+
 }
 
 main {
