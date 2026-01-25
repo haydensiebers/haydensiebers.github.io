@@ -94,18 +94,19 @@ function setup() {
   
 }
 
-let ballRadius = 0;
+let ballRadius = 0.0;
 
 function draw() {
   background(primaryColor);
   
-  let maxDistance = 0.06;
+  let maxDistance = 0.045;
 
   frameRate(10);
 
   // how many frames for a full up+down
   let period = 100;
-  ballRadius = maxDistance * (1 - abs(((frameCount) % (2*period)) / period - 1));
+  let startMultiplier = 0.1;
+  ballRadius = maxDistance * (1 - abs(((frameCount+startMultiplier*period) % (2*period)) / period - 1));
 
   let edgeWeight = 2;
 
@@ -128,10 +129,10 @@ function draw() {
   }
 
   graphDrawing.clearEdges();
-  graphDrawing.healGraph(ballRadius, edgeWeight);
+  graphDrawing.healGraph(2*ballRadius, edgeWeight);
 }
 
-function createFullGraph(numSubNodes, kernelDistance, edgeWeight = 2) {
+function createFullGraph(numSubNodes) {
   let graph = createMainGraph();
 
   let g = createDistributionGraph(numSubNodes, (x, y) => Math.tan(-3*(x-1))/4 + 0.75 - y, 0.2);

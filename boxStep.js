@@ -103,12 +103,12 @@ let boxStepSketch = (p) => {
     // INITIALIZE STARTING POSITIONS
     // -------------------------------
     if (side === "left" && leftState.x === null) {
-      leftState.x = p.width * 0.35;
-      leftState.y = p.height * 0.5;
+      leftState.x = p.width * 0.43;
+      leftState.y = p.height * 0.55;
     }
 
     if (side === "right" && rightState.x === null) {
-      rightState.x = p.width * 0.40;
+      rightState.x = p.width * 0.42;
       rightState.y = p.height * 0.5;
     }
 
