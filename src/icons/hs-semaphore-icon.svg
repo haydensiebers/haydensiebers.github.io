@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="210mm"
+   viewBox="0 0 210 210"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="hs-semaphore-icon.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.75815456"
+     inkscape:cx="474.83722"
+     inkscape:cy="492.64361"
+     inkscape:window-width="958"
+     inkscape:window-height="1101"
+     inkscape:window-x="-8"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g16" />
+  <defs
+     id="defs1" />
+  <g
+     id="g16"
+     style="stroke:#ffffff">
+    <g
+       id="g1"
+       style="stroke:#18453b;stroke-opacity:1">
+      <circle
+         style="fill:none;stroke:#18453b;stroke-width:15.9336;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers;stroke-opacity:1"
+         id="path13-8"
+         cx="104.99999"
+         cy="105.00003"
+         r="81.734047" />
+      <path
+         style="fill:none;stroke:#18453b;stroke-width:15.9336;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers;stroke-opacity:1"
+         d="m 105,105.00003 -81.734056,-10e-6"
+         id="path14-2"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#18453b;stroke-width:15.9336;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers;stroke-opacity:1"
+         d="M 105,105 47.205292,162.79471"
+         id="path15-4" />
+      <path
+         style="fill:none;stroke:#18453b;stroke-width:15.9336;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers;stroke-opacity:1"
+         d="m 105,105.00003 57.79469,57.7947"
+         id="path16-5" />
+    </g>
+  </g>
+</svg>
