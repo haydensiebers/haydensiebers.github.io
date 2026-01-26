@@ -295,6 +295,8 @@ footer {
   justify-content: space-between;
 }
 
+/* Spinner */
+
 /* Responsive header for small screens */
 @media (max-width: 600px) {
   .horizontal {
@@ -317,8 +319,8 @@ footer {
 
 #knotwfc-canvas-container {
   pointer-events: none;
-  min-width: 70px;
-  min-height: 70px;
+  min-width: 100px;
+  min-height: 100px;
   width: min(250px, 40vw); /* Responsive but capped */
   height: min(250px, 40vw);
   flex-shrink: 0;
