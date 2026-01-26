@@ -99,7 +99,7 @@ let ballRadius = 0.0;
 function draw() {
   background(primaryColor);
   
-  let maxDistance = 0.045;
+  let maxDistance = 0.04;
 
   frameRate(10);
 
