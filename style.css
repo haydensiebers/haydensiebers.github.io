@@ -3,7 +3,7 @@
 :root {
     --black: #000;
     --white: #fff;
-    --color-primary: #fbf7f3;
+    --color-primary: #faf3ed;
     --color-secondary: #DAE1E0;
     --color-msu-green: #18453B;
     --color-tertiary: #6777dc;
@@ -86,8 +86,8 @@ body {
 }
 
 main {
-  margin: var(--padding-base);
-  padding: var(--padding-base);
+  margin: 0 var(--padding-base);
+  padding: 0 var(--padding-base);
   flex: 1;
   position: relative;
 }
@@ -95,6 +95,18 @@ main {
 .full-width {
   margin: 0 calc(-2 * var(--padding-base)); /* cancel out main's padding */
   width: calc(100% + 4 * var(--padding-base));
+}
+
+.transparent-margins-oneSeventh {
+  width: calc(100%);
+  margin: 0 auto;
+  mask-image: linear-gradient(
+    to right,
+      transparent,
+      black calc(100% / 7),      /* 1/7 = ~14.3% */
+      black calc(100% * 6 / 7),  /* 6/7 = ~85.7% */
+      transparent
+  );
 }
 
 .center {
@@ -150,6 +162,10 @@ div {
 .vertical {
   display: flex;
   flex-direction: column;
+}
+
+.fillVertical {
+  flex: 1;
 }
 
 nav {
@@ -247,7 +263,8 @@ button:hover {
   max-width: 500px;
   height: auto;
   object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* subtle shadow */
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); */
+  border-radius: 4px;
 }
 
 #grid {

@@ -135,7 +135,7 @@ function draw() {
 function createFullGraph(numSubNodes) {
   let graph = createMainGraph();
 
-  let g = createDistributionGraph(numSubNodes, (x, y) => Math.tan(-3*(x-1))/4 + 0.75 - y, 0.2);
+  let g = createDistributionGraph(numSubNodes, (x, y) => Math.tan(-3*(x-1))/4 + 0.75 - y, 0.6);
   graph.addGraph(g);
 
   return graph;
