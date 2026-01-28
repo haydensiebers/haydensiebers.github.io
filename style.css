@@ -3,7 +3,7 @@
 :root {
     --black: #000;
     --white: #fff;
-    --color-primary: #faf3ed;
+    --color-primary: #faf5f2;
     --color-secondary: #DAE1E0;
     --color-msu-green: #18453B;
     --color-tertiary: #6777dc;
@@ -174,7 +174,7 @@ nav {
 
 a {
   text-decoration: none;
-  color: var(--black);
+  color: inherit;
   transition: color 0.2s ease;
   font-weight: 600;
 }
@@ -219,6 +219,13 @@ a:hover {
   width: 1.2em;
   height: 1.2em;
 }
+
+.currentColorIcon {
+  background-color: currentColor;
+  mask: var(--icon-src) no-repeat center / contain;
+  -webkit-mask: var(--icon-src) no-repeat center / contain;
+}
+
 
 button {
   background-color: var(--color-accent);
@@ -311,8 +318,6 @@ header {
 
 footer {
   position: bottom;
-  background-color: var(--color-msu-green);
-  color: var(--color-primary);
   min-height: var(--footer-height);
   font-size: 0.9em;
   padding: var(--padding-base) calc(2 * var(--padding-base));
@@ -320,6 +325,13 @@ footer {
   display: flex;
   justify-content: space-between;
 }
+
+/*
+footer:not([class*="div"]) {
+  background-color: var(--color-msu-green);
+  color: var(--color-primary);
+}
+*/
 
 /* Spinner */
 
