@@ -163,8 +163,17 @@ a {
   font-weight: 600;
 }
 
+a img {
+  border: none;
+}
+
 a:hover {
   color: var(--color-accent)
+}
+
+.hiddenText {
+  font-size: 0.1rem;
+  color: transparent;
 }
 
 .accent {

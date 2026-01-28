@@ -22,11 +22,15 @@
        r="88.704208" />
     <path
        style="fill:none;stroke:#ffffff;stroke-width:17.2924;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="M 105,105 42.276645,167.72336"
+       d="m 105.00001,105 -88.704219,-1e-5"
+       id="path14-2" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:17.2924;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       d="M 105.00001,105 60.647899,181.82012"
        id="path15-4" />
     <path
        style="fill:none;stroke:#ffffff;stroke-width:17.2924;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 105.00001,105 62.72335,62.72336"
+       d="m 105.00001,105 44.35211,76.82012"
        id="path1" />
     <circle
        style="fill:none;stroke:#18453b;stroke-width:17.2924;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
@@ -107,13 +111,5 @@
        d="m 2331.3364,625.84719 c -1.4205,-1.80557 -34.9366,-59.66976 -74.4803,-128.58711 -41.2884,-71.9582 -75.6816,-128.95426 -80.7859,-133.87771 l -8.8884,-8.57345 H 2010.4999 1853.818 l 3.7064,-20.44438 c 21.8392,-120.46475 116.6271,-217.29458 236.7533,-241.853452 78.0395,-15.954562 162.4178,1.129456 229.0438,46.374362 42.3609,28.76669 86.118,81.65838 106.5373,128.77768 41.7658,96.37779 29.1556,212.4146 -32.1183,295.54657 -24.9486,33.84837 -61.746,68.5585 -66.4041,62.63749 z"
        id="path19"
        transform="scale(0.26458333)" />
-    <path
-       style="fill:none;stroke:#ffffff;stroke-width:17.2924;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 105.00001,105 1e-5,-88.704218"
-       id="path2" />
-    <path
-       style="fill:none;stroke:#ffffff;stroke-width:17.2924;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="M 104.99999,193.70422 105,105"
-       id="path3" />
   </g>
 </svg>
