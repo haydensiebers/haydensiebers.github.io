@@ -264,6 +264,36 @@ button:hover {
   margin-left: 2em;
 }
 
+/* Introduction Styling */
+
+.introduction-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+}
+
+.introduction-content > div {
+  text-align: left;
+  width: 100%;
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+  .introduction-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .profile-photo {
+    flex-shrink: 0;
+  }
+}
+
 .photo img.profile-photo {
   width: 100%;
   max-width: 500px;
