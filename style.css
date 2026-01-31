@@ -1,5 +1,7 @@
 
 /* Color Palette */
+
+
 :root {
     --black: #000;
     --white: #fff;
@@ -9,6 +11,7 @@
     --color-tertiary: #6777dc;
     --color-accent: #f4b642;
 }
+
 
 .greendiv {
   background: var(--color-msu-green);
