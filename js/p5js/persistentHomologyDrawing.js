@@ -256,7 +256,7 @@ function drawTriangle(tri, graph) {
   let cx = c.position.x * width;
   let cy = c.position.y * height;
 
-  let cFill = color(tertiaryColor);
+  let cFill = color(msuGreenColor);
   cFill.setAlpha(50);
   fill(cFill);
   noStroke();
