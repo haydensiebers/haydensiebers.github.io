@@ -51,6 +51,59 @@
     --font-size-heading: 2em;
 }
 
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.75em;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+h5 {
+  font-size: 1.25em;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 100;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1em;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.italic {
+  font-style: italic;
+}
+
 .textNormal {
   font-style: normal;
 }
@@ -62,6 +115,52 @@
   --header-height: calc(2 * var(--font-size-base) + 3 * var(--padding-base));
   --footer-height: calc(2 * var(--font-size-base) + 1em);
 }
+
+/* Margins */
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }  /* 4px */
+.mb-2 { margin-bottom: 0.5rem; }   /* 8px */
+.mb-3 { margin-bottom: 1rem; }     /* 16px */
+.mb-4 { margin-bottom: 1.5rem; }   /* 24px */
+.mb-5 { margin-bottom: 2rem; }     /* 32px */
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 2rem; }
+
+.my-0 { margin-top: 0; margin-bottom: 0; }
+.my-1 { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+.my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.my-3 { margin-top: 1rem; margin-bottom: 1rem; }
+.my-4 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+.my-5 { margin-top: 2rem; margin-bottom: 2rem; }
+
+/* Padding */
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 1rem; }
+.p-4 { padding: 1.5rem; }
+.p-5 { padding: 2rem; }
+
+/* Indentation */
+.indent { text-indent: 2rem; }
+.indent-sm { text-indent: 1rem; }
+.indent-lg { text-indent: 3rem; }
+
+/* Line height */
+.leading-tight { line-height: 1.25; }
+.leading-normal { line-height: 1.5; }
+.leading-relaxed { line-height: 1.75; }
+.leading-loose { line-height: 2; }
+
+/* Text alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
 
 /*Global Styles*/
 
@@ -212,6 +311,8 @@ a:hover {
 .hiddenText {
   font-size: 0.1rem;
   color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 .accent {
